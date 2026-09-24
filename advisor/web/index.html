@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Activities Advisor</title><link rel="stylesheet" href="/static/style.css"><script src="/static/app.js" defer></script></head>
+<body>
+<header><a class="brand" href="/"><span class="brand-icon">↗</span><span>Activities Advisor<small>MAKE ROOM FOR A GOOD DAY</small></span></a><div class="header-actions"><span id="mode" class="badge">Connecting…</span><button id="new-trip" class="quiet">New trip</button></div></header>
+<div id="demo-banner" class="demo-banner" hidden>OFFLINE DEMO · Edinburgh fixture data. No live weather, search, or model calls.</div>
+<main>
+<section class="planner"><p class="eyebrow">A LITTLE PLANNING. MORE EXPLORING.</p><h1>What does your <br>ideal day look like?</h1><p class="intro">Tell me where you’re going and what you enjoy. I’ll check the forecast, explore the options, and put a plan together.</p>
+<div id="chat" class="chat" aria-live="polite"><div id="welcome" class="welcome"><p>Try a starting point</p><button class="example" data-request="Plan a relaxed afternoon in Edinburgh, Scotland tomorrow. I like museums and architecture. Keep costs low and include an indoor option if it rains."><span>Edinburgh, at your pace</span><small>Museums · architecture · rain alternatives</small><b>↗</b></button><button class="example" data-request="Plan an afternoon in Tokyo, Japan tomorrow with art, gardens, and a budget of 5000 yen per person. Please check the weather and venue details."><span>A different side of Tokyo</span><small>Art · gardens · a clear budget</small><b>↗</b></button></div></div>
+<div id="error" class="error" role="alert" hidden></div>
+<form id="composer"><label class="sr-only" for="message">Describe your trip or revise the plan</label><textarea id="message" maxlength="3000" rows="3" placeholder="A city, a date, a few things you love…" required></textarea><div class="composer-bottom"><span>Follow-ups welcome</span><button id="send" type="submit">Plan my day <span>↗</span></button></div></form>
+<p class="footnote">Suggestions and source links. No bookings or purchases.</p>
+</section>
+<section class="workspace">
+<div class="workspace-top"><div><p class="eyebrow">YOUR DAY, TAKING SHAPE</p><h2 id="plan-heading">A plan worth stepping out for.</h2></div><span id="plan-state" class="badge" hidden>Draft itinerary</span></div>
+<div id="empty-plan" class="empty-plan"><div class="route-art" aria-hidden="true"><span>01</span><i></i><span>02</span><i></i><span>03</span></div><h3>Start with a place.<br>We’ll explore the possibilities.</h3><p>Your itinerary, forecast, and source links will appear here.</p><div class="capabilities"><span>Forecast-aware</span><span>Source-linked</span><span>Easy to revise</span></div></div>
+<div id="plan" hidden><div id="weather" class="weather" hidden></div><div id="activities"></div><div id="caveats" class="caveats"></div><div class="sources"><h3>Sources used in this plan</h3><ul id="sources"></ul></div></div>
+<section class="activity-panel"><div class="activity-top"><h3><span class="status-dot"></span> Tool activity</h3><span id="run-status" role="status">Ready when you are</span></div><p class="activity-help">Actual tool calls appear here as the agent works.</p><ol id="activity"><li class="placeholder">No tools called yet.</li></ol><details id="run-details" hidden><summary>Run details</summary><code id="run-id"></code><a id="trace-link" target="_blank" rel="noopener">Open recorded trace ↗</a></details></section>
+</section>
+</main><footer>Activities Advisor <span>Deploying AI Agents in Production Environments · Clip 2</span></footer>
+</body></html>

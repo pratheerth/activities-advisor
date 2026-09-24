@@ -1,0 +1,14 @@
+{
+  "mode": "offline demo",
+  "passed": true,
+  "checks": [
+    "desktop initial render",
+    "four streamed tool entries",
+    "itinerary and source links",
+    "conversational revision",
+    "saved trace opens",
+    "mobile width without overflow",
+    "new trip resets state"
+  ],
+  "browser_errors": []
+}

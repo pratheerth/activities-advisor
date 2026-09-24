@@ -1,0 +1,595 @@
+{
+  "mode": "demo",
+  "scope": "Local isolated two-turn smoke check. Structural checks only; not evidence of factual correctness, deployed reliability, or general conversational quality. Demo mode makes no external calls.",
+  "passed": true,
+  "checks": {
+    "initial_plan_returned": true,
+    "four_tools_completed": true,
+    "revision_returned": true,
+    "same_conversation": true,
+    "same_date": true,
+    "revision_at_most_two_stops": true
+  },
+  "review_required": [
+    "Weather date/location and forecast match the request.",
+    "Sources actually support the selected activities and any hours or prices.",
+    "The revision retains the budget/interests and meaningfully reduces walking.",
+    "Tool failures and unknown facts are explained honestly."
+  ],
+  "turns": [
+    {
+      "request": "Plan a relaxed afternoon in Edinburgh, Scotland on 2026-09-23. I like museums and architecture. Keep costs low, read relevant venue details, and include an indoor option if it rains.",
+      "result": {
+        "type": "result",
+        "status": "limited",
+        "message": "This is the offline Edinburgh fixture. Switch APP_MODE to live to plan real trips.",
+        "itinerary": {
+          "title": "An Edinburgh afternoon, rain or shine",
+          "location": "Edinburgh",
+          "date": "2026-09-23",
+          "weather_summary": "Illustrative light rain, 14\u00b0C. This is an offline fixture, not real weather.",
+          "activities": [
+            {
+              "time": "13:00",
+              "title": "National Museum of Scotland",
+              "details": "Explore the indoor galleries at your own pace. This is illustrative content for testing the UI.",
+              "cost_note": "Fixture: general admission free; verify before visiting.",
+              "source_ids": [
+                "S1"
+              ]
+            },
+            {
+              "time": "15:00",
+              "title": "Scottish National Gallery",
+              "details": "An indoor alternative. Allow a break and consider transport between venues; walking distance has not been verified.",
+              "cost_note": "Fixture: check exhibition charges.",
+              "source_ids": [
+                "S2"
+              ]
+            },
+            {
+              "time": "16:30",
+              "title": "A flexible break",
+              "details": "Leave time for a rest rather than adding another attraction. Choose somewhere nearby on the day.",
+              "cost_note": "Refreshments extra; no price verified.",
+              "source_ids": [
+                "S3"
+              ]
+            }
+          ],
+          "caveats": [
+            "Offline fixture: no external API calls or live language understanding.",
+            "No tickets booked. Check current details before visiting."
+          ]
+        },
+        "run_id": "f7584e0c-d268-420c-8a96-17b7fbaee35a",
+        "conversation_id": "5c666754-bebc-44f0-a6f3-64411451853f",
+        "mode": "demo",
+        "sources": [
+          {
+            "title": "National Museum of Scotland \u00b7 fixture",
+            "url": "https://www.nms.ac.uk/national-museum-of-scotland",
+            "excerpt": "Fixture: indoor museum; general admission free. Check official details before visiting.",
+            "id": "S1",
+            "retrieved_at": "2026-09-22T18:34:55.196180+00:00"
+          },
+          {
+            "title": "Scottish National Gallery \u00b7 fixture",
+            "url": "https://www.nationalgalleries.org/visit/scottish-national-gallery",
+            "excerpt": "Fixture: indoor art gallery; general collection free. Check official details.",
+            "id": "S2",
+            "retrieved_at": "2026-09-22T18:34:55.196189+00:00"
+          },
+          {
+            "title": "Edinburgh visitor information \u00b7 fixture",
+            "url": "https://edinburgh.org/",
+            "excerpt": "Fixture: visitor information about Edinburgh.",
+            "id": "S3",
+            "retrieved_at": "2026-09-22T18:34:55.196193+00:00"
+          }
+        ],
+        "weather": {
+          "provider": "OFFLINE FIXTURE",
+          "location": "Edinburgh",
+          "location_id": "edinburgh-demo",
+          "date": "2026-09-23",
+          "slots": [
+            {
+              "local_time": "2026-09-23T12:00:00+01:00",
+              "temperature_c": 14,
+              "conditions": "light rain (fixture)",
+              "rain_probability": 0.7,
+              "wind_m_s": 4
+            }
+          ],
+          "note": "Illustrative test weather. Not a forecast."
+        }
+      },
+      "events": [
+        {
+          "type": "started",
+          "elapsed_ms": 0,
+          "run_id": "f7584e0c-d268-420c-8a96-17b7fbaee35a",
+          "conversation_id": "5c666754-bebc-44f0-a6f3-64411451853f",
+          "mode": "demo"
+        },
+        {
+          "type": "thinking",
+          "elapsed_ms": 0,
+          "label": "Considering the request and available evidence"
+        },
+        {
+          "type": "model_call",
+          "elapsed_ms": 0,
+          "model": "demo-fixture",
+          "usage": {}
+        },
+        {
+          "type": "tool_started",
+          "elapsed_ms": 0,
+          "tool": "resolve_location",
+          "label": "Resolve location \u00b7 OpenWeather",
+          "arguments": {
+            "place": "Edinburgh, GB"
+          }
+        },
+        {
+          "type": "tool_finished",
+          "elapsed_ms": 0,
+          "tool": "resolve_location",
+          "label": "Resolve location \u00b7 OpenWeather",
+          "result": {
+            "locations": [
+              {
+                "id": "edinburgh-demo",
+                "name": "Edinburgh",
+                "country": "GB",
+                "region": "Scotland",
+                "lat": 55.9533,
+                "lon": -3.1883
+              }
+            ]
+          },
+          "ok": true
+        },
+        {
+          "type": "thinking",
+          "elapsed_ms": 0,
+          "label": "Considering the request and available evidence"
+        },
+        {
+          "type": "model_call",
+          "elapsed_ms": 0,
+          "model": "demo-fixture",
+          "usage": {}
+        },
+        {
+          "type": "tool_started",
+          "elapsed_ms": 0,
+          "tool": "get_weather_forecast",
+          "label": "Check forecast \u00b7 OpenWeather",
+          "arguments": {
+            "location_id": "edinburgh-demo",
+            "date": "2026-09-23"
+          }
+        },
+        {
+          "type": "tool_finished",
+          "elapsed_ms": 0,
+          "tool": "get_weather_forecast",
+          "label": "Check forecast \u00b7 OpenWeather",
+          "result": {
+            "provider": "OFFLINE FIXTURE",
+            "location": "Edinburgh",
+            "location_id": "edinburgh-demo",
+            "date": "2026-09-23",
+            "slots": [
+              {
+                "local_time": "2026-09-23T12:00:00+01:00",
+                "temperature_c": 14,
+                "conditions": "light rain (fixture)",
+                "rain_probability": 0.7,
+                "wind_m_s": 4
+              }
+            ],
+            "note": "Illustrative test weather. Not a forecast."
+          },
+          "ok": true
+        },
+        {
+          "type": "thinking",
+          "elapsed_ms": 0,
+          "label": "Considering the request and available evidence"
+        },
+        {
+          "type": "model_call",
+          "elapsed_ms": 0,
+          "model": "demo-fixture",
+          "usage": {}
+        },
+        {
+          "type": "tool_started",
+          "elapsed_ms": 0,
+          "tool": "search_activities",
+          "label": "Search activities \u00b7 Tavily",
+          "arguments": {
+            "query": "Edinburgh indoor free activities official museum gallery"
+          }
+        },
+        {
+          "type": "tool_finished",
+          "elapsed_ms": 0,
+          "tool": "search_activities",
+          "label": "Search activities \u00b7 Tavily",
+          "result": {
+            "sources": [
+              {
+                "title": "National Museum of Scotland \u00b7 fixture",
+                "url": "https://www.nms.ac.uk/national-museum-of-scotland",
+                "excerpt": "Fixture: indoor museum; general admission free. Check official details before visiting.",
+                "id": "S1",
+                "retrieved_at": "2026-09-22T18:34:55.196180+00:00"
+              },
+              {
+                "title": "Scottish National Gallery \u00b7 fixture",
+                "url": "https://www.nationalgalleries.org/visit/scottish-national-gallery",
+                "excerpt": "Fixture: indoor art gallery; general collection free. Check official details.",
+                "id": "S2",
+                "retrieved_at": "2026-09-22T18:34:55.196189+00:00"
+              },
+              {
+                "title": "Edinburgh visitor information \u00b7 fixture",
+                "url": "https://edinburgh.org/",
+                "excerpt": "Fixture: visitor information about Edinburgh.",
+                "id": "S3",
+                "retrieved_at": "2026-09-22T18:34:55.196193+00:00"
+              }
+            ],
+            "usage": {}
+          },
+          "ok": true
+        },
+        {
+          "type": "thinking",
+          "elapsed_ms": 0,
+          "label": "Considering the request and available evidence"
+        },
+        {
+          "type": "model_call",
+          "elapsed_ms": 0,
+          "model": "demo-fixture",
+          "usage": {}
+        },
+        {
+          "type": "tool_started",
+          "elapsed_ms": 0,
+          "tool": "read_activity_details",
+          "label": "Read venue details \u00b7 Tavily",
+          "arguments": {
+            "source_ids": [
+              "S1",
+              "S2"
+            ]
+          }
+        },
+        {
+          "type": "tool_finished",
+          "elapsed_ms": 0,
+          "tool": "read_activity_details",
+          "label": "Read venue details \u00b7 Tavily",
+          "result": {
+            "pages": [
+              {
+                "source_id": "S1",
+                "text": "OFFLINE FIXTURE: indoor cultural attraction. Confirm current opening hours and special-exhibition charges on the official website."
+              },
+              {
+                "source_id": "S2",
+                "text": "OFFLINE FIXTURE: indoor cultural attraction. Confirm current opening hours and special-exhibition charges on the official website."
+              }
+            ],
+            "failed_source_ids": [],
+            "usage": {}
+          },
+          "ok": true
+        },
+        {
+          "type": "thinking",
+          "elapsed_ms": 0,
+          "label": "Considering the request and available evidence"
+        },
+        {
+          "type": "model_call",
+          "elapsed_ms": 0,
+          "model": "demo-fixture",
+          "usage": {}
+        },
+        {
+          "type": "run_finished",
+          "elapsed_ms": 1,
+          "status": "limited",
+          "tool_calls": 4
+        }
+      ]
+    },
+    {
+      "request": "Make it less walking, with no more than two main stops. Keep the same city, date and interests.",
+      "result": {
+        "type": "result",
+        "status": "limited",
+        "message": "Here is the fixture revision, with fewer stops. Live mode is needed for real conversational planning.",
+        "itinerary": {
+          "title": "A slower afternoon in Edinburgh",
+          "location": "Edinburgh",
+          "date": "2026-09-23",
+          "weather_summary": "Illustrative light rain, 14\u00b0C. This is an offline fixture, not real weather.",
+          "activities": [
+            {
+              "time": "13:00",
+              "title": "National Museum of Scotland",
+              "details": "Explore the indoor galleries at your own pace. This is illustrative content for testing the UI.",
+              "cost_note": "Fixture: general admission free; verify before visiting.",
+              "source_ids": [
+                "S1"
+              ]
+            },
+            {
+              "time": "15:00",
+              "title": "Scottish National Gallery",
+              "details": "An indoor alternative. Allow a break and consider transport between venues; walking distance has not been verified.",
+              "cost_note": "Fixture: check exhibition charges.",
+              "source_ids": [
+                "S2"
+              ]
+            }
+          ],
+          "caveats": [
+            "Offline fixture: no external API calls or live language understanding.",
+            "No tickets booked. Check current details before visiting."
+          ]
+        },
+        "run_id": "f13acf9d-6625-4eb1-baa6-060ed62585fa",
+        "conversation_id": "5c666754-bebc-44f0-a6f3-64411451853f",
+        "mode": "demo",
+        "sources": [
+          {
+            "title": "National Museum of Scotland \u00b7 fixture",
+            "url": "https://www.nms.ac.uk/national-museum-of-scotland",
+            "excerpt": "Fixture: indoor museum; general admission free. Check official details before visiting.",
+            "id": "S1",
+            "retrieved_at": "2026-09-22T18:34:55.198907+00:00"
+          },
+          {
+            "title": "Scottish National Gallery \u00b7 fixture",
+            "url": "https://www.nationalgalleries.org/visit/scottish-national-gallery",
+            "excerpt": "Fixture: indoor art gallery; general collection free. Check official details.",
+            "id": "S2",
+            "retrieved_at": "2026-09-22T18:34:55.198913+00:00"
+          }
+        ],
+        "weather": {
+          "provider": "OFFLINE FIXTURE",
+          "location": "Edinburgh",
+          "location_id": "edinburgh-demo",
+          "date": "2026-09-23",
+          "slots": [
+            {
+              "local_time": "2026-09-23T12:00:00+01:00",
+              "temperature_c": 14,
+              "conditions": "light rain (fixture)",
+              "rain_probability": 0.7,
+              "wind_m_s": 4
+            }
+          ],
+          "note": "Illustrative test weather. Not a forecast."
+        }
+      },
+      "events": [
+        {
+          "type": "started",
+          "elapsed_ms": 0,
+          "run_id": "f13acf9d-6625-4eb1-baa6-060ed62585fa",
+          "conversation_id": "5c666754-bebc-44f0-a6f3-64411451853f",
+          "mode": "demo"
+        },
+        {
+          "type": "thinking",
+          "elapsed_ms": 0,
+          "label": "Considering the request and available evidence"
+        },
+        {
+          "type": "model_call",
+          "elapsed_ms": 0,
+          "model": "demo-fixture",
+          "usage": {}
+        },
+        {
+          "type": "tool_started",
+          "elapsed_ms": 0,
+          "tool": "resolve_location",
+          "label": "Resolve location \u00b7 OpenWeather",
+          "arguments": {
+            "place": "Edinburgh, GB"
+          }
+        },
+        {
+          "type": "tool_finished",
+          "elapsed_ms": 0,
+          "tool": "resolve_location",
+          "label": "Resolve location \u00b7 OpenWeather",
+          "result": {
+            "locations": [
+              {
+                "id": "edinburgh-demo",
+                "name": "Edinburgh",
+                "country": "GB",
+                "region": "Scotland",
+                "lat": 55.9533,
+                "lon": -3.1883
+              }
+            ]
+          },
+          "ok": true
+        },
+        {
+          "type": "thinking",
+          "elapsed_ms": 0,
+          "label": "Considering the request and available evidence"
+        },
+        {
+          "type": "model_call",
+          "elapsed_ms": 0,
+          "model": "demo-fixture",
+          "usage": {}
+        },
+        {
+          "type": "tool_started",
+          "elapsed_ms": 0,
+          "tool": "get_weather_forecast",
+          "label": "Check forecast \u00b7 OpenWeather",
+          "arguments": {
+            "location_id": "edinburgh-demo",
+            "date": "2026-09-23"
+          }
+        },
+        {
+          "type": "tool_finished",
+          "elapsed_ms": 0,
+          "tool": "get_weather_forecast",
+          "label": "Check forecast \u00b7 OpenWeather",
+          "result": {
+            "provider": "OFFLINE FIXTURE",
+            "location": "Edinburgh",
+            "location_id": "edinburgh-demo",
+            "date": "2026-09-23",
+            "slots": [
+              {
+                "local_time": "2026-09-23T12:00:00+01:00",
+                "temperature_c": 14,
+                "conditions": "light rain (fixture)",
+                "rain_probability": 0.7,
+                "wind_m_s": 4
+              }
+            ],
+            "note": "Illustrative test weather. Not a forecast."
+          },
+          "ok": true
+        },
+        {
+          "type": "thinking",
+          "elapsed_ms": 0,
+          "label": "Considering the request and available evidence"
+        },
+        {
+          "type": "model_call",
+          "elapsed_ms": 0,
+          "model": "demo-fixture",
+          "usage": {}
+        },
+        {
+          "type": "tool_started",
+          "elapsed_ms": 0,
+          "tool": "search_activities",
+          "label": "Search activities \u00b7 Tavily",
+          "arguments": {
+            "query": "Edinburgh indoor free activities official museum gallery"
+          }
+        },
+        {
+          "type": "tool_finished",
+          "elapsed_ms": 0,
+          "tool": "search_activities",
+          "label": "Search activities \u00b7 Tavily",
+          "result": {
+            "sources": [
+              {
+                "title": "National Museum of Scotland \u00b7 fixture",
+                "url": "https://www.nms.ac.uk/national-museum-of-scotland",
+                "excerpt": "Fixture: indoor museum; general admission free. Check official details before visiting.",
+                "id": "S1",
+                "retrieved_at": "2026-09-22T18:34:55.198907+00:00"
+              },
+              {
+                "title": "Scottish National Gallery \u00b7 fixture",
+                "url": "https://www.nationalgalleries.org/visit/scottish-national-gallery",
+                "excerpt": "Fixture: indoor art gallery; general collection free. Check official details.",
+                "id": "S2",
+                "retrieved_at": "2026-09-22T18:34:55.198913+00:00"
+              },
+              {
+                "title": "Edinburgh visitor information \u00b7 fixture",
+                "url": "https://edinburgh.org/",
+                "excerpt": "Fixture: visitor information about Edinburgh.",
+                "id": "S3",
+                "retrieved_at": "2026-09-22T18:34:55.198916+00:00"
+              }
+            ],
+            "usage": {}
+          },
+          "ok": true
+        },
+        {
+          "type": "thinking",
+          "elapsed_ms": 0,
+          "label": "Considering the request and available evidence"
+        },
+        {
+          "type": "model_call",
+          "elapsed_ms": 0,
+          "model": "demo-fixture",
+          "usage": {}
+        },
+        {
+          "type": "tool_started",
+          "elapsed_ms": 0,
+          "tool": "read_activity_details",
+          "label": "Read venue details \u00b7 Tavily",
+          "arguments": {
+            "source_ids": [
+              "S1",
+              "S2"
+            ]
+          }
+        },
+        {
+          "type": "tool_finished",
+          "elapsed_ms": 0,
+          "tool": "read_activity_details",
+          "label": "Read venue details \u00b7 Tavily",
+          "result": {
+            "pages": [
+              {
+                "source_id": "S1",
+                "text": "OFFLINE FIXTURE: indoor cultural attraction. Confirm current opening hours and special-exhibition charges on the official website."
+              },
+              {
+                "source_id": "S2",
+                "text": "OFFLINE FIXTURE: indoor cultural attraction. Confirm current opening hours and special-exhibition charges on the official website."
+              }
+            ],
+            "failed_source_ids": [],
+            "usage": {}
+          },
+          "ok": true
+        },
+        {
+          "type": "thinking",
+          "elapsed_ms": 0,
+          "label": "Considering the request and available evidence"
+        },
+        {
+          "type": "model_call",
+          "elapsed_ms": 0,
+          "model": "demo-fixture",
+          "usage": {}
+        },
+        {
+          "type": "run_finished",
+          "elapsed_ms": 0,
+          "status": "limited",
+          "tool_calls": 4
+        }
+      ]
+    }
+  ]
+}
